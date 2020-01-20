@@ -1,0 +1,249 @@
+html,
+body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+
+    margin: 0;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+
+.title {
+    font-size: 6rem !important;
+    color: red !important;
+    opacity: 0.3 !important;
+    font-weight: bold;
+    line-height: 1;
+
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    /* transition: 0.3s; */
+}
+
+.card-footer {
+    padding: .3rem 1.25rem;
+    background-color: #fff;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+.paper{
+    box-shadow:
+    /* The top layer shadow */
+    0 1px 1px rgba(0,0,0,0.15),
+    /* The second layer */
+    0 10px 0 -5px #eee,
+    /* The second layer shadow */
+    0 10px 1px -4px rgba(0,0,0,0.15),
+     /* The third layer */
+    0 20px 0 -10px #eee,
+    /* The third layer shadow */
+    0 20px 1px -9px rgba(0,0,0,0.15);
+}
+
+.nav{
+    justify-content: center;
+}
+.nav-link.active{
+    border: 1px solid lightgrey
+}
+.nav-link {
+    display: block;
+    padding: 0rem 0.5rem;
+    line-height: 1.5em;
+}
+
+a {
+    color:inherit;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+/* On mouse-over, add a deeper shadow */
+.card-header {
+
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card-header:hover {
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+}
+.angle-down{
+text-align: center;
+font-size: 2rem;
+opacity: 0.2;
+
+}
+
+.round {
+    position: relative;
+  }
+  
+  .round label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 28px;
+    transition: 0.2s;
+    margin: 5px;
+  }
+  
+  .round label:after {
+    border: 2px solid teal;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 7px;
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    transform: rotate(-45deg);
+    width: 12px;
+    transition: 0.2s;
+    
+  }
+  
+  .round input[type="checkbox"] {
+    visibility: hidden;
+    
+
+  }
+
+  .del-btn > i{
+    cursor: pointer;
+    color: rgb(184, 36, 36);
+    opacity: 0.5;
+  }
+
+  .del-btn{
+ 
+    display: none;
+   
+
+}
+
+li{
+    font-size: 24px;
+    font-family: 'Lora', serif;
+
+}
+
+li:hover .del-btn{
+    display: block;
+    
+}
+
+.data-name{
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+}
+
+.invisible{
+    /* display: none; */
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.visible{
+    display: block !important;
+}
+.completed{
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+  
+  .round input[type="checkbox"]:checked + label {
+    color: teal;
+    border-color: teal;
+  }
+  
+  .round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+.todo-input {
+
+    border: none;
+
+}
+
+input {
+
+    padding: 5px;
+    font-size: 24px;
+    font-family: 'Lora', serif;
+    width: 100%;
+    font-weight: 500;
+}
+
+input:focus {
+    outline: none;
+    font-size: 24px;
+    font-weight: 500;
+    
+    
+}
+
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 24px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: normal;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 24px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: normal;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    font-size: 24px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: normal;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 24px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: normal;
+}
+
+
