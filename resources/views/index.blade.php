@@ -44,10 +44,10 @@
                         </div>
                         <div class="card-body p-0 m-0 tab-content" id="nav-tabContent">
                             
-                                <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                <div class="tab-pane show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                                     <ul class="list-group list-group-flush" id="todo-list"></ul>
                                 </div>
-                                <div class="tab-pane fade" id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
+                                <div class="tab-pane " id="nav-active" role="tabpanel" aria-labelledby="nav-active-tab">
                                     <ul class="list-group list-group-flush" id="todo-list-active">
                                         <li class="list-group-item">
                                            
@@ -65,22 +65,9 @@
                                         </li>
                                         </ul>
                                 </div>
-                                <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
+                                <div class="tab-pane " id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
                                     <ul class="list-group list-group-flush" id="todo-list-completed">
-                                        <li class="list-group-item">
-                                           
                                         
-                                        <div class="row"> 
-                                                <div class="col-1 text-center">
-                                                    <div class="round">
-                                                        <input type="checkbox" id="checkbox-0" onchange="stateChange(0)" class="cbx" data-id="0" checked>
-                                                        <label for="checkbox-0"></label>
-                                                      </div>
-                                                </div>
-                                                <div class="col-8 text-left data-name completed" id="data-0">dfdsdsddf</div>
-                                                <div class="col-3 text-right del-btn"><i class="fas fa-times" onclick="removeTodo(0)" aria-hidden="true"></i></div>
-                                            </div>
-                                        </li>
                                         </ul>
                                 </div>
                        
