@@ -77,15 +77,7 @@ function addToList(data) {
         var type = $(this).html();
 
         switch (type) {
-            case 'All':
-                var list = '';
-                $.each(todos, function (i, v) {
-                        list += generateList(v.id, v.data, v.completed);
-                })
-
-                $('#todo-list').html(list);
-                break;
-
+      
             case 'Active':
                 var list = '';
                    $.each(todos, function (i, v) {
