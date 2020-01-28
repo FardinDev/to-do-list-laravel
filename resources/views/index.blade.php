@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <div class="row m-auto">
                                 <div class="col-1 angle-down my-auto">
-                                    <i class="fas fa-angle-down"></i>
+                                    <i class="fas fa-angle-down" id="angle-down"></i>
                                 </div>
                                 <div class="col-11">
                                     <form action="" id="todo-form" autocomplete="off">
