@@ -74,7 +74,8 @@ body {
     justify-content: center;
 }
 .nav-link.active{
-    border: 1px solid lightgrey
+    border: 1px solid lightgrey;
+    color: #0056b3;
 }
 .nav-link {
     display: block;

@@ -1,3 +1,4 @@
+
 var todo = {};
 
 if (localStorage.getItem("todos") === null) {
@@ -9,10 +10,10 @@ if (localStorage.getItem("todos") === null) {
 }
 
 var first = 0;
-
+var oriVal;
 
 $(document).ready(function () {
-    
+
 
     if (todos.length > 0) {
         generateUi();
@@ -22,12 +23,12 @@ $(document).ready(function () {
 
     $('#todo-form').on('submit', function (e) {
 
-        
+
         e.preventDefault();
         var data = $('#todo-input').val();
         if (data.length > 0) {
-            
-            
+
+
             addToList(data);
 
             $('#angle-down').css('display', 'inline');
@@ -38,6 +39,37 @@ $(document).ready(function () {
 
 });
 
+// edit on double click
+
+$(".list-group-flush").on('dblclick', 'div > div > span', function (e) {
+    e.stopPropagation(); //<-------stop the bubbling of the event here
+    oriVal = $(this).text();
+    $(this).text("");
+    var spanid = this.id.split('-');
+
+    $("<input type='text' id='inp-" + spanid[2] + "' value = " + oriVal + ">").appendTo(this).focus();
+});
+
+$(".list-group-flush").on('focusout', 'div > div > span > input', function () {
+
+    var inpid = this.id.split('-');
+    var $this = $(this);
+    $this.parent().text($this.val() || oriVal);
+    $this.remove(); // Don't just hide, remove the element.
+    updateTodo(inpid[1], $this.val() || oriVal)
+});
+
+$(".list-group-flush").on('keyup', 'div > div > span > input', function (event) {
+    if (event.keyCode == 13) {
+        var inpid = this.id.split('-');
+        var $this = $(this);
+        $this.parent().text($this.val() || oriVal);
+        $this.remove(); // Don't just hide, remove the element.
+        updateTodo(inpid[1], $this.val() || oriVal)
+    }
+});
+
+// edit on double click
 
 
 function addToList(data) {
@@ -51,7 +83,7 @@ function addToList(data) {
     $('#todo-input').val('');
 
     generateUi();
-  
+
 
 };
 
@@ -67,51 +99,48 @@ function stateChange(id) {
     generateUi();
 }
 
-function removeTodo(id) {
-    console.log(todos);
+function updateTodo(id, val) {
 
+    $.each(todos, function (i, v) {
+        if (v.id == id) {
+            v.data = val;
+        }
+    });
+    generateUi();
+}
+
+function removeTodo(id) {
+    
     var newTodos = $.grep(todos, function (e) {
         return e.id != id;
     });
 
     todos = newTodos;
 
-    console.log(todos);
 
-    if (todos.length == 0) {
-
-        todosEmpy();
-
-    } 
-        
-        generateUi();
+    generateUi();
 
 }
-
-function todosEmpy(id) {
-    $('.card-footer').remove();
-    $('#angle-down').css('display', 'none');
-
-
-}
-
 
 function clearCompleted() {
 
     $.each(todos, function (i, v) {
 
         if (v.completed) {
-          
+
             removeTodo(v.id);
         }
 
-          
-        
     });
 
 
 }
 
+function todosEmpy() {
+    $('#footer').remove();
+    $('#angle-down').css('display', 'none');
+
+}
 
 function generateUi() {
 
@@ -128,25 +157,77 @@ function generateUi() {
 
         if (v.completed) {
             completed += generateList(v.id, v.data, v.completed, 'completed');
-            
+
         }
 
-            all += generateList(v.id, v.data, v.completed, 'all');
-        
+        all += generateList(v.id, v.data, v.completed, 'all');
+
     });
 
 
     $('#todo-list').html(all);
-  
+
     $('#todo-list-active').html(active);
 
     $('#todo-list-completed').html(completed);
 
+    addRemoveFooter();
+
+    $('#left').html(numberOfActive +
+        " item" +
+        (numberOfActive < 2 ? "" : "s"));
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function generateList(id, data, completed, key) {
+    var string = '';
+    if (completed) {
+        string = `<li class="list-group-item">
+
+    <div class="row"> 
+            <div class="col-1 text-center">
+                <div class="round">
+                    <input type="checkbox" id="checkbox-` + key + `-` + id + `" onchange="stateChange(` + id +
+            `)" class="cbx" data-id='` + id + `' checked/>
+                    <label for="checkbox-` + key + `-` + id + `"></label>
+                  </div>
+            </div>
+            <div class="col-8 text-left data-name completed" ><span id='data-` + key + `-` + id + `' >` + data + `</span></div>
+            <div class="col-3 text-right del-btn"><i class="fas fa-times" onclick='removeTodo(` + id + `)'></i></div>
+        </div>
+    </li>`;
+    } else {
+        string = `<li class="list-group-item">
+       
+    <div class="row"> 
+            <div class="col-1 text-center">
+                <div class="round">
+                    <input type="checkbox" id="checkbox-` + key + `-` + id + `" onchange="stateChange(` + id +
+            `)" class="cbx" data-id='` + id + `'/>
+                    <label for="checkbox-` + key + `-` + id + `"></label>
+                  </div>
+            </div>
+            <div class="col-8 text-left data-name" ><span id='data-` + key + `-` + id + `' >` + data + `</span></div>
+            <div class="col-3 text-right del-btn"><i class="fas fa-times" onclick='removeTodo(` + id + `)'></i></div>
+        </div>
+    </li>`;
+    }
 
 
-    if (first === 0) {
+
+
+
+    return string;
+
+}
+
+function addRemoveFooter() {
+    
+    if (!$('#footer').length) {
+       
         $('#main-card').append(` 
-        <div class="card-footer paper">
+        <div class="card-footer paper" id="footer">
         <div class="row">
             <div class="col-2">
                 <span id='left'>1 items</span> left 
@@ -166,105 +247,12 @@ function generateUi() {
             </div>
         </div>
         </div>`);
-    
-        first++;
-    }
-
-
-    $('#left').html( numberOfActive + 
-        " item" + 
-        (numberOfActive === 1 ? "" : "s"));
-    
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-
-function updateVal(currentEle, value, id) {
-    // $(document).off('click');
-    $(currentEle).html('<input class="thVal" type="text" value="' + value + '" />');
-    $(".thVal").focus();
-    $(".thVal").keyup(function (event) {
-        if (event.keyCode == 13) {
-            var val = $(".thVal").val();
-            updateTodo(id, val)
-            $(currentEle).html(val);
-        }
-    });
-
-    $(document).click(function () {
-
-            if($(event.target).attr('class')!="thVal")
-            {
-                // var val = $(".thVal").val();
-
-                // updateTodo(id, val)
-                $(currentEle).html(value);
-                // $(document).off('click');
-            }
-
-    });
-
-}
-
-
-function updateTodo(id, val) {
-
-    $.each(todos, function (i, v) {
-        if (v.id == id) {
-            v.data = val;
-        }
-    });
-    generateUi();
-}
-
-
-function generateList(id, data, completed, key) {
-    var string = '';
-    if (completed) {
-         string = `<li class="list-group-item">
-
-    <div class="row"> 
-            <div class="col-1 text-center">
-                <div class="round">
-                    <input type="checkbox" id="checkbox-` + key + `-` + id + `" onchange="stateChange(` + id +
-            `)" class="cbx" data-id='` + id + `' checked/>
-                    <label for="checkbox-` + key + `-` + id + `"></label>
-                  </div>
-            </div>
-            <div class="col-8 text-left data-name completed" id='data-` + key + `-` + id + `'>` + data + `</div>
-            <div class="col-3 text-right del-btn"><i class="fas fa-times" onclick='removeTodo(` + id + `)'></i></div>
-        </div>
-    </li>`;
     } else {
-         string = `<li class="list-group-item">
-       
-    <div class="row"> 
-            <div class="col-1 text-center">
-                <div class="round">
-                    <input type="checkbox" id="checkbox-` + key + `-` + id + `" onchange="stateChange(` + id +
-            `)" class="cbx" data-id='` + id + `'/>
-                    <label for="checkbox-` + key + `-` + id + `"></label>
-                  </div>
-            </div>
-            <div class="col-8 text-left data-name" id='data-` + key + `-` + id + `'>` + data + `</div>
-            <div class="col-3 text-right del-btn"><i class="fas fa-times" onclick='removeTodo(` + id + `)'></i></div>
-        </div>
-    </li>`;
+        if (todos.length === 0) {
+            todosEmpy();
+        }
     }
 
 
-    // $('#data-' + key + '-' + id ).dblclick(function (e) {
-    //     if ($(e.target).attr('class') != "thVal") {
-    //         e.stopPropagation(); //<-------stop the bubbling of the event here
-    //         var currentEle = $(this);
-    //         var value = $(this).html();
-    //         var initId = this.id.replace('data-'+ key +'-', '');
-    //         console.log('fire!');
-    //         updateVal(currentEle, value, initId);
-    //     }
-    // });
-    
-
-    return string;
-
 }
+
