@@ -14,14 +14,15 @@ body {
 }
 
 .delBtn{
-    border: 1px solid lightgrey;
+  
     display: inline;
     padding: 0rem 0.5rem;
     line-height: 1.5em;
     cursor: pointer;
 }
 .delBtn:hover{
-    color: red;
+
+    text-decoration: underline;
 }
 
 .flex-center {

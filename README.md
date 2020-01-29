@@ -15,7 +15,7 @@ cd to-do-list-laravel
 ```
 
 ### 3. Install Composer Dependencies
-To install all this source code we run composer with the following command.
+To install all this source code run composer with the following command.
 ```sh
 composer install
 ```

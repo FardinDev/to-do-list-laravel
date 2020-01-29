@@ -175,6 +175,15 @@ function generateUi() {
         " item" +
         (numberOfActive < 2 ? "" : "s"));
 
+        var completedTask = todos.filter(function (el) {
+            return el.completed == true; 
+          });
+if(completedTask.length){
+    $('.delBtn').show();
+}else{
+    $('.delBtn').hide();
+
+}
     localStorage.setItem("todos", JSON.stringify(todos));
 }
 
@@ -227,10 +236,10 @@ function addRemoveFooter() {
         $('#main-card').append(` 
         <div class="card-footer paper" id="footer">
         <div class="row">
-            <div class="col-sm pb-1">
+            <div class="col-2 pb-1">
                 <span id='left'>1 items</span> left 
             </div>
-            <div class="col-sm pb-1">
+            <div class="col-6 pb-1">
                 <nav >
                     <div class="nav" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All</a>
@@ -240,7 +249,7 @@ function addRemoveFooter() {
                 </nav>
                 
             </div>
-            <div class="col-sm pb-1">
+            <div class="col-4 pb-1">
                 <span class='delBtn' onclick='clearCompleted()'>Clear Completed</span>
             </div>
         </div>
