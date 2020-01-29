@@ -31,8 +31,6 @@ $(document).ready(function () {
 
             addToList(data);
 
-            $('#angle-down').css('display', 'inline');
-
         }
 
     });
@@ -225,7 +223,7 @@ function generateList(id, data, completed, key) {
 function addRemoveFooter() {
     
     if (!$('#footer').length) {
-       
+        $('#angle-down').css('display', 'inline');
         $('#main-card').append(` 
         <div class="card-footer paper" id="footer">
         <div class="row">
